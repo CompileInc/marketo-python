@@ -4,7 +4,7 @@ from xml.sax.saxutils import escape
 import lead_record
 
 
-def wrap(email=None, attributes=None):
+def _wrap(email=None, attributes=None):
     attr = ''
     for i in attributes:
         attr += '<attribute>' \
@@ -14,15 +14,17 @@ def wrap(email=None, attributes=None):
             '</attribute>'
 
     return(
-        '<mkt:paramsSyncLead>' +
         '<leadRecord>' +
         '<Email>' + email + '</Email>' +
         '<leadAttributeList>' + attr + '</leadAttributeList>' +
         '</leadRecord>' +
         '<returnLead>true</returnLead>' +
-        '<marketoCookie></marketoCookie>' +
-        '</mkt:paramsSyncLead>'
+        '<marketoCookie></marketoCookie>'
     )
+
+
+def wrap(email=None, attributes=None):
+    return '<mkt:paramsSyncLead>' + _wrap(email, attributes) + '</mkt:paramsSyncLead>'
 
 
 def unwrap(response):

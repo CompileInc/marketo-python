@@ -7,7 +7,8 @@ __version__ = VERSION
 import requests
 import auth
 
-from marketo.wrapper import get_lead, get_lead_activity, request_campaign, sync_lead
+from marketo.wrapper import get_lead, get_lead_activity, request_campaign, \
+    sync_lead, sync_mobjects, sync_multiple_leads, describe_mobject
 
 
 class Client:
@@ -106,5 +107,34 @@ class Client:
         response = self.request(body)
         if response.status_code == 200:
             return sync_lead.unwrap(response)
+        else:
+            raise Exception(response.text)
+
+    def sync_multiple_leads(self, data_list):
+        body = sync_multiple_leads.wrap(data_list)
+        response = self.request(body)
+        if response.status_code == 200:
+            return sync_multiple_leads.unwrap(response)
+        else:
+            raise Exception(response.text)
+
+    def sync_mobjects(self, mobject_type, data_list):
+        raise NotImplementedError
+        body = sync_mobjects.wrap(mobject_type, data_list)
+        response = self.request(body)
+        if response.status_code == 200:
+            return True
+        else:
+            raise Exception(response.text)
+
+    def sync_opportunities(self, data_list):
+        raise NotImplementedError
+        return self.sync_mobjects('Opportunity', data_list)
+
+    def describe_mobject(self, mobject_type):
+        body = describe_mobject.wrap(mobject_type)
+        response = self.request(body)
+        if response.status_code == 200:
+            return describe_mobject.unwrap(response)
         else:
             raise Exception(response.text)
