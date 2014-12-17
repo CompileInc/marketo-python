@@ -13,7 +13,7 @@ def wrap(data_list, dedup_enabled=True):
 
 
 def unwrap(response):
-    root = ET.fromstring(response.text)
+    root = ET.fromstring(response.text.encode('utf8'))
     r = {}
     for status_xml in root.findall('.//syncStatus'):
         r['lead_id'] = int(status_xml.find('leadId').text)

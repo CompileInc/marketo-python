@@ -11,6 +11,6 @@ def wrap(mobject_type):
 
 
 def unwrap(response):
-    root = ET.fromstring(response.text)
+    root = ET.fromstring(response.text.encode('utf8'))
     xml_el = root.find('.//metadata')
     return mobject_meta.unwrap(xml_el)

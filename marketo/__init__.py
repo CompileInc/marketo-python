@@ -46,7 +46,7 @@ class Client:
 
     def request(self, body):
         envelope = self.wrap(body)
-        response = requests.post(self.soap_endpoint, data=envelope,
+        response = requests.post(self.soap_endpoint, data=envelope.encode('utf8'),
             headers={
                 'Connection': 'Keep-Alive',
                 'Soapaction': '',
