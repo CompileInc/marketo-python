@@ -10,7 +10,7 @@ def wrap(email=None, attributes=None):
         attr += '<attribute>' \
             '<attrName>' + i[0] + '</attrName>' \
             '<attrType>' + i[1] + '</attrType>' \
-            '<attrValue>' + escape(i[2]) + '</attrValue>' \
+            '<attrValue>' + escape(str(i[2])) + '</attrValue>' \
             '</attribute>'
 
     return(
