@@ -8,7 +8,7 @@ def wrap_one(mobject_type, id=None, attributes=None, attr_type=None, object_asso
         attr += '' +\
             '<attrib>' +\
                 '<name>' + i[0] + '</name>' +\
-                '<value>' + escape(i[1]) + '</value>' +\
+                '<value>' + escape(str(i[1])) + '</value>' +\
             '</attrib>'
 
     if id is None:
